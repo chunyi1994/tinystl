@@ -4,54 +4,32 @@
 #include "iterator.h"
 #include "shared_ptr.h"
 #include "utility.h"
-#include <vector>
-
+#include "strings.h"
+#include "mutex_lock.h"
+#include "condition.h"
 #include "string_ver_1.h"
+#include "queue.h"
+#include "stack.h"
+#include "thread.h"
+
+#include <vector>
+#include <unistd.h>
 using namespace std;
 using namespace tinystl;
 
-void foo(String s){
-    cout<<s.c_str()<<endl;
-}
+mutex mutex_;
+condition cond_(mutex_);
 
-String baz(){
-    String st("bazk");
-    return st;
-}
-
-int test(){
-    String str("wodehaomama");
-    foo(str);
-
-    String st = baz();
-    cout<<st.c_str()<<endl;
-
-    vector<String> vec;
-    vec.push_back("wodemama");
-    vec.push_back(str);
-
-
-    cout<<strlen("woai\0")<<endl;
-    cout<<vec.size()<<endl;
-
-
-    String my("mddy");
-    my.append("wor");
-    my[3] = 'b';
-    cout<<my.c_str()<<endl;
-    cout<<my.size()<<endl;
-
-    const String me(my);
-
-    char c = me[3];
-    cout<<c<<endl;
-    return 0;
+void run() {
+    cout<<"hello" <<endl;
+    cout<<"hahahha"<<endl;
 }
 
 
-    int main(){
-        test();
-    }
+int main(){
+    thread t(run);
+    sleep(5);
+}
 
 
 

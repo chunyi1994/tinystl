@@ -8,7 +8,7 @@ struct pair{
 
     pair() {}
 
-    Pair(Key k, Value v) :
+    pair(Key k, Value v) :
         first(std::move(k)),
         second(std::move(v)) {}
 

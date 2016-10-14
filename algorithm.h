@@ -3,6 +3,64 @@
 #include <algorithm>
 namespace tinystl {
 
+template<class Iterator, class T>
+inline void fill(Iterator begin, Iterator end, T value) {
+    while(begin != end) {
+        *begin = value;
+        begin++;
+    }
+}
+
+template<class Iterator, class T>
+inline void fill_n(Iterator begin, size_t n, T value) {
+    while(n--) {
+        *begin = value;
+        begin++;
+    }
+}
+
+template <class Iterator, class T>
+inline size_t count(Iterator begin, Iterator end, T value) {
+    size_t n = 0;
+    while(begin != end) {
+        if(*begin == value) {
+            n++;
+        }
+        begin++;
+    }
+    return n;
+}
+
+template <class Iterator, class Function>
+inline bool count_if(Iterator begin, Iterator end, Function func) {
+    size_t n = 0;
+    while(begin != end) {
+        if(func(*begin)){
+            n++;
+        }
+        begin++;
+    }
+    return n;
+ }
+
+template <class T>
+inline T max(const T& value1, const T& value2) {
+    if(value1 > value2) {
+        return value1;
+    }
+
+    return value2;
+}
+
+template <class T>
+inline T min(const T& value1, const T& value2) {
+    if(value1 < value2) {
+        return value1;
+    }
+
+    return value2;
+}
+
 template<class Iterator, class Function>
 inline Function for_each(Iterator begin, Iterator end, Function func) {
     for(; begin != end; begin++) {
