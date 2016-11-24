@@ -26,5 +26,11 @@ HEADERS += \
     queue.h \
     thread.h \
     array.h \
-    heap.h
+    heap.h \
+    ci_string.h \
+    any.h \
+    placeholders.h \
+    list.h \
+    hashmap.h \
+    vector.h
 

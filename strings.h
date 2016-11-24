@@ -5,13 +5,14 @@
 #include <utility>
 #include <sstream>
 #include <algorithm>
-
+//为stl扩充的工具函数
+//这里的函数都是可以在标准STL里使用的
 using std::vector;
 using std::string;
 using std::copy;
 using std::transform;
 
-//这里的函数都是可以在标准STL里使用的
+
 
 bool trimLeft(string& str)
 {

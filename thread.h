@@ -14,6 +14,7 @@ typedef  function<void()> function_void;
 void* thread_function(void* arg) {
     function_void* func = (function_void*) arg;
     (*func)();
+    return (void*) 0;
 }
 
 class thread {

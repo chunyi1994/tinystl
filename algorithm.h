@@ -1,7 +1,89 @@
 #ifndef ALGORITHM_H
 #define ALGORITHM_H
 #include <algorithm>
+#include "iterator.h"
 namespace tinystl {
+
+template<class InputIterator1, class InputIterator2>
+inline bool equal(InputIterator1 iter1_begin, InputIterator1 iter1_end, InputIterator2 iter2) {
+    while(iter1_begin != iter1_end) {
+        if(*iter1_begin != *iter2) {
+            return false;
+        }
+        iter1_begin++;
+        iter2++;
+    }
+    return true;
+}
+
+template<class InputIterator, class OutputIterator>
+inline OutputIterator copy(InputIterator begin, InputIterator end, OutputIterator dest_begin) {
+    while(begin != end) {
+        *dest_begin = *begin;
+        begin++;
+        dest_begin++;
+    }
+    return dest_begin;
+}
+
+template <class Iterator, class Value>
+inline Iterator binary_search(Iterator begin, Iterator end, Value find_value) {
+    Iterator notFound = end;
+    Iterator mid;
+    typename Iterator::difference_type distance_n;
+    while(end - begin > 0) {
+        distance_n = end - begin;
+        mid = begin;
+        mid += distance_n / 2;
+        if(find_value > *mid) {
+            begin = mid + 1;
+        }else if(find_value == *mid) {
+            return mid;
+        }else {
+            end = mid - 1;
+        }
+    }
+
+    if(* begin != find_value) {
+        return notFound;
+    } else {
+        return begin;
+    }
+}
+
+template <class Iterator, class T>
+inline T accumulate(Iterator begin, Iterator end, T init) {
+    while(begin != end) {
+        init += *begin;
+        begin++;
+    }
+    return init;
+}
+
+template <class Iterator, class T, class Func>
+inline T accumulate(Iterator begin, Iterator end, T init, Func func) {
+    while(begin != end) {
+        func(init, *begin);
+        begin++;
+    }
+    return init;
+}
+
+template <class Iterator, class Function>
+inline void generate_n(Iterator begin, size_t n, Function func) {
+    while(n--) {
+        *begin = func();
+        begin++;
+    }
+}
+
+template <class Iterator, class Function>
+inline void generate(Iterator begin, Iterator end, Function func) {
+    while(begin != end) {
+        *begin = func();
+        begin++;
+    }
+}
 
 template<class Iterator, class T>
 inline void fill(Iterator begin, Iterator end, T value) {
@@ -41,7 +123,7 @@ inline bool count_if(Iterator begin, Iterator end, Function func) {
         begin++;
     }
     return n;
- }
+}
 
 template <class T>
 inline T max(const T& value1, const T& value2) {
