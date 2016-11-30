@@ -21,7 +21,7 @@ inline typename iterator_traits<Iterator>::difference_type
 _distance(Iterator begin, Iterator end, input_iterator_tag) {
     typedef typename iterator_traits<Iterator>::difference_type difference_type;
     difference_type n = 0;
-    for(;begin != end; begin++) {
+    for (;begin != end; begin++) {
         n++;
     }
     return n;
@@ -46,22 +46,23 @@ inline void _advance(Iterator& iter, Distance n, random_access_iterator_tag) {
 
 template<class Iterator, class Distance>
 inline void _advance(Iterator& iter, Distance n, bidirectional_iterator_tag) {
-    if(n > 0) {
-        while(n--) {
-            iter++;
-        }
+    if(n >= 0) {
+        while (n--) ++iter;
     } else {
-        while(n++) {
-            iter--;
-        }
+        while (n++) --iter;
     }
 }
 
 template<class Iterator, class Distance>
 inline void _advance(Iterator& iter, Distance n, input_iterator_tag) {
-    while(n--) {
+    while (n--) {
         iter++;
     }
+}
+
+template<class Iterator, class Distance>
+inline void _advance(Iterator& iter, Distance n, forward_iterator_tag) {
+    _advance(iter, n, input_iterator_tag());
 }
 
 template<class Iterator, class Distance>
@@ -69,6 +70,6 @@ inline void advance(Iterator& iter, Distance n, bidirectional_iterator_tag) {
     _advance(iter, n, iterator_category(iter));
 }
 
-}
+}  //namespace
 #endif // ITERATOR_H
 

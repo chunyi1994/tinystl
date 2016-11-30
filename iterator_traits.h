@@ -47,19 +47,19 @@ iterator_category(const Iterator& iterator) {
 
 template <class Iterator>
 inline typename iterator_traits<Iterator>::difference_type *
-difference_type (const Iterator& iterator) {
+difference_type(const Iterator& iterator) {
     typedef typename iterator_traits<Iterator>::difference_type  difference_type;
     return static_cast<difference_type*>(0);
 }
 
 template <class Iterator>
 inline typename iterator_traits<Iterator>::value_type *
-value_type (const Iterator& iterator) {
+value_type (const Iterator&) {
     typedef typename iterator_traits<Iterator>::value_type  value_type;
     return static_cast<value_type*>(0);
 }
 
-}
+} //namespace
 
 #endif // ITERATOR_TRAITS_H
 
